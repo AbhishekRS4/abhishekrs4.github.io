@@ -81,10 +81,70 @@
                 <name>Abhishek Ramanathapura Satyanarayana</name>
               </p>
 
-              <heading>Deploying a dockerized API using FastAPI on HuggingFaceSpaces</heading>
+              <heading>Deploying a dockerized Deep Learning, Computer Vision API using FastAPI on HuggingFaceSpaces</heading>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-04-15</strong> </span>
+              <p>
+                The deployed application can be found in the HuggingFaceSpaces
+                <a href="https://huggingface.co/spaces/abhishekrs4/Overhead_MNIST">Overhead_MNIST</a>.
+                This can also be found in the GitHub <a href="https://huggingface.co/spaces/abhishekrs4/Overhead_MNIST">overhead_mnist</a>.
+                The Overhead MNIST dataset, with ten classes, is used for this project.
+                A CNN is trained to classify overhead satellite images. <code>Weights and Biases</code> is used for MLOps.
+                The best performing model (with <strong> >96% </strong>) is used for deployment.
+              </p>
 
-              <p align="center">
-                <a href="blogs/tech_blog/tech_blog_1.html"> Deploying a dockerized API using FastAPI on HuggingFaceSpaces </a> &nbsp/&nbsp
+              <p>
+                An API is deployed using FastAPI, to which an image can be sent in a <code>POST</code> request.
+                The response would contain the prediction for the image. The <code>UploadFile</code> object is used to
+                send an image file via <code>POST</code> request to the FastAPI application.
+                The <code>uvicorn</code> ASGI server is used for serving the FastAPI application.
+              </p>
+
+              <p>
+                I had to use <code>git-lfs</code> for tracking the weights files.
+                This is achieved using the <code>git lfs install</code> command in the HF project repo.
+              </p>
+
+              </p>
+                There is a tailor-made option for deploying docker applications on HuggingFaceSpaces.
+                The <code>Readme.md</code> for any <code>HuggingSpace</code> repo contains the metadata.
+                The <code>app_file</code> is an important field mentioning the application file.
+                The port <code>7860</code> is used for serving docker applications deployed on HuggingFaceSpaces.
+              </p>
+
+              <p>
+                Dockerizing a FastAPI application is straight-forward without any major issues.
+                However, I faced some minor issues with the dependencies.
+              </p>
+
+              <ul>
+                <li>
+                  <p>
+                    The first issue is with one of the dependencies of <code>FastAPI</code>.
+                    The dependency <code>python-multipart</code> needs to be explicitly
+                    mentioned in the <code>requirements.txt</code>.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    The second issue is with <code>OpenCV</code>. The recommended thing to do
+                    is to use a headless version of OpenCV with python namely the <code>opencv-python-headless</code>
+                    instead of the normal <code>opencv-python</code>.
+                  </p>
+                </li>
+              </ul>
+
+              <p>
+                The endpoint link to which the <code>POST</code> request can be sent for a HuggingFaceSpaces
+                deployed application can be found in <code>Embed this Space</code> option. The <code>localhost:port</code>
+                is replaced with the link from <code>Embed this Space</code> with the appropriate application endpoint.
+              </p>
+
+              <div class="featured-image">
+                <img src="../../assets/images/tech_blogs/blog_1/overhead_mnist_hf_deployment.png" width="100%">
+              </div>
+
+              <p>
+                To summarize, I had a positive learning experience during this project deployment.
               </p>
             </td>
           </tr>
