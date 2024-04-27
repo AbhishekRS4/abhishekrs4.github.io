@@ -82,10 +82,14 @@
                 Tech Blog: Deploying a dockerized Deep Learning, Computer Vision API using FastAPI on HuggingFaceSpaces
               </heading>
               <br>
-              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-04-15</strong> </span>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-04-15</strong>, updated on <strong>2024-04-27</strong> </span>
 
               <p>
-                The deployed application can be found in the HuggingFaceSpaces
+                In this project, a FastAPI backend application and a streamlit frontend is deployed to HuggingFaceSpaces.
+              </p>
+
+              <p>
+                The deployed API backend application can be found in the HuggingFaceSpaces
                 <a href="https://huggingface.co/spaces/abhishekrs4/Overhead_MNIST">Overhead_MNIST</a>.
                 This can also be found in the GitHub <a href="https://huggingface.co/spaces/abhishekrs4/Overhead_MNIST">overhead_mnist</a>.
                 The Overhead MNIST dataset, with ten classes, is used for this project.
@@ -140,8 +144,51 @@
                 is replaced with the link from <code>Embed this Space</code> with the appropriate application endpoint.
               </p>
 
+              <p>
+                The following image shows a screenshot of the output logs of the backend API.
+              </p>
+
               <div class="featured-image">
-                <img src="../../assets/images/tech_blogs/blog_1/overhead_mnist_hf_deployment.png" width="100%">
+                <img src="../../assets/images/tech_blogs/blog_1/overhead_mnist_backend_hf.png" width="100%">
+              </div>
+
+              <p>
+                The deployed streamlit frontend application can be found in the HuggingFaceSpaces
+                <a href="https://huggingface.co/spaces/abhishekrs4/Overhead_MNIST_frontend">Overhead_MNIST_Frontend</a>.
+              </p>
+
+              <p>
+                For the streamlit frontend, I faced minor issues during deployment.
+              </p>
+
+              <ul>
+                <li>
+                  <p>
+                    The first issue is with the streamlit app port.
+                    The <code>app_port</code> needs to be explicitly
+                    mentioned in the <code>Readme.md</code>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    The second issue is with the streamlit config. Some of the config is in <code>.streamlit/config.toml</code>.
+                    This is in the project directory. The rest of them are in the command used to start the application.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    The third issue is with the dockerizing the application. A user needs to be added along
+                    with some env path for containerized deployment.
+                  </p>
+                </li>
+              </ul>
+
+              <p>
+                The following image shows a screenshot of the output logs of the frontend.
+              </p>
+
+              <div class="featured-image">
+                <img src="../../assets/images/tech_blogs/blog_1/overhead_mnist_frontend_hf.png" width="100%">
               </div>
 
               <p>
