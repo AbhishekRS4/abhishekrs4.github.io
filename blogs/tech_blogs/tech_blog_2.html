@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+  <meta name=viewport content=“width=800”>
+  <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
+  <meta name="google-site-verification" content="XXjK99sZKdpFN8kxwbglvDK8Gbhanfx-QfZGGG_TU1M" />
+  <style type="text/css">
+    /* Color scheme stolen from Sergey Karayev */
+
+    a {
+      color: #1772d0;
+      text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+      color: #f09228;
+      text-decoration: none;
+    }
+
+    body,
+    td,
+    th,
+    tr,
+    p,
+    a {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px
+    }
+
+    strong {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+    }
+
+    heading {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 24px;
+    }
+
+    papertitle {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 700
+    }
+
+    name {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 34px;
+    }
+
+    #paper_img{
+      width: 200px;
+    }
+
+    .fade {
+      transition: opacity .2s ease-in-out;
+      -moz-transition: opacity .2s ease-in-out;
+      -webkit-transition: opacity .2s ease-in-out;
+    }
+
+    span.highlight {
+      background-color: #ffffd0;
+    }
+  </style>
+
+  <title>Abhishek Ramanathapura Satyanarayana</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href="../../assets/css/tech_blog.css" rel="stylesheet">
+</head>
+
+<body>
+  <table width="900" border="0" align="center" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <tr>
+            <td width="67%" valign="middle">
+              <heading>
+                Tech Blog: AWS EC2 instance
+              </heading>
+              <br>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-05-03</strong>, updated on <strong>2024-05-03</strong> </span>
+
+              <!-- General info about the project -->
+              <h3>The blog is about...</h3>
+              <p>
+                This is about setup and usage guide for AWS EC2 instance.
+              </p>
+
+              <!-- Some specific info about the project -->
+              <h3>Initial Setup</h3>
+              <p>
+                The first step is to setup an EC2 instance. This can be done via services -> EC2 -> launch an instance.
+                Setup the instance with the relevant configuration that is needed.
+                <ul>
+                  <li>
+                    <p>
+                      The name of the instance
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Application and OS image (Ubuntu, is there a better option for developers <p>&#128514;</p>)
+                      with the appropriate version and architecture
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Instance type (the one with the free tier <p>&#128517;</p>, <code>t2.micro</code> or <code>t3.micro</code>, of course initially)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Key pair login by create new key pair with <code>key pair type=RSA</code> and <code>private key file format=.pem</code>.
+                      A <code>key.pem</code> file will be downloaded. This can be used for the remote login to the EC2 instance.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Configure storage by selecting the maximum amount of storage available (for free tier)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Launch instance with default configurations for the rest
+                    </p>
+                  </li>
+                </ul>
+              </p>
+
+              <h3>Remote login to the instance</h3>
+              <p>
+                Go to instances and select the instance that you just created. Use the public IPv4 address for login.
+                The following command can be used for remote login.
+                <code>ssh -i ~/Downloads/key.pem ubuntu@IPv4</code>
+              </p>
+
+              <!-- Some challenges faced during this project -->
+              <p>
+                I faced one error while trying remote login. The following image shows the error.
+              </p>
+              <div class="featured-image">
+                <img src="../../assets/images/tech_blogs/blog_2/login_error_key_perm.png" width="100%">
+              </div>
+
+              <p>
+                This can be resolved with a simple permission change for the <code>key.pem</code> file.
+                This can be done with the following command <code>chmod 600 key.pem</code>.
+                Login to the EC2 instance with a sigh of relief now <p>&#128517;</p>. The following
+                image shows a successful login.
+              </p>
+              <div class="featured-image">
+                <img src="../../assets/images/tech_blogs/blog_2/login_error_key_perm.png" width="100%">
+              </div>
+
+              <p>
+                Once you reach this stage, you can do whatever you want. The next step would obviously
+                be to setup python virtual env and install relevant packages.
+              </p>
+
+            </td>
+          </tr>
+        </table>
+
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <p>
+            <i>
+              <strong>About the author</strong>: Abhishek is a graduate AI engineer who is interested
+              in developing and deploying Artificial Intelligence, Machine Learning, Computer Vision, Data Science
+              applications. His goal is to improve human lives by leveraging real world data.
+            </i>
+          </p>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
