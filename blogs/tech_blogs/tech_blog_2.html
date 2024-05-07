@@ -79,21 +79,22 @@
           <tr>
             <td width="67%" valign="middle">
               <heading>
-                Tech Blog: AWS EC2 instance setup and usage
+                Tech Blog: AWS instance setup and usage for deploying Machine Learning pipeline
               </heading>
               <br>
-              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-05-03</strong>, updated on <strong>2024-05-04</strong> </span>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-05-03</strong>, updated on <strong>2024-05-07</strong> </span>
 
               <!-- General info about the project -->
               <h3>The blog is about...</h3>
               <p>
-                This is about setup and usage guide for AWS EC2 instance.
+                This is about setup and usage guide for AWS instance for deploying Machine Learning pipeline.
               </p>
 
               <!-- Some specific info about the project -->
-              <h3>Initial Setup</h3>
+              <h3>1) EC2 instance Setup</h3>
+              <h5>1.1) Basic Instructions</h5>
               <p>
-                The first step is to setup an EC2 instance. This can be done via services -> EC2 -> launch an instance.
+                The first step is to setup an EC2 instance. This can be done via services -> compute -> EC2 -> launch an instance.
                 Setup the instance with the relevant configuration that is needed.
                 <ul>
                   <li>
@@ -131,7 +132,7 @@
                 </ul>
               </p>
 
-              <h3>Remote login to the instance</h3>
+              <h5>1.2) Remote login to the EC2 instance</h5>
               <p>
                 Go to instances and select the instance that you just created. Use the public IPv4 address for login.
                 The following command can be used for remote login.
@@ -161,9 +162,70 @@
                 be to setup python virtual env and install relevant packages.
               </p>
 
+              <h3>2) Configuring an S3 bucket</h3>
+              <p>
+                This can be done via services -> storage -> S3 -> create bucket by choosing a unique
+                bucket name with default settings.
+              </p>
+
+              <h3>3) Configuring and setting up an instance of RDS</h3>
+              <p>
+                This can be done via services -> database -> RDS -> create database.
+              </p>
+
+              <ul>
+                <li>
+                  <p>
+                    Select PostgreSQL as backend database for the MLFlow. Choose the free tier template &#128517;.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Choose the database instance identifier name, master username, and setup auto generate password.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Select appropriate instance configuration and storage required.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Select appropriate instance configuration and storage required.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Let the connectivity, tags and monitoring be defaults. Choose password authentication for the database.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    In additional configuration, choose an initial database name.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Do not forget to make a copy of the username and password to make connection to the database &#128517;.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Edit security groups and add an inbound rule for PostgresSQL for the EC2 instance to connect to the database.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Finally, make a note of the endpoint and port to the database.
+                  </p>
+                </li>
+              </ul>
+
+              <h3>Main takeaway</h3>
               <p>
                 I had a positive learning experience and learned that it is relatively easy to setup and
-                use an AWS EC2 instance (Not my first time use of EC2 instance though &#128517;)!
+                use an AWS EC2 instance, S3 bucket and RDS for configuring MLFlow! This blog can be used for deploying complex ML pipelines on AWS.
+                This is not my first time setup / use of EC2 instance and S3 bucket &#128517; but a first time configuring RDS myself.
               </p>
 
             </td>
