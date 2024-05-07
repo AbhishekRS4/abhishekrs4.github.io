@@ -192,7 +192,7 @@
               </p>
               <p>
                 Then make changes to the following file
-                <code>virtual_env/ml_env/lib/python3.12/site-packages/mlflow/cli.pycli.py</code>
+                <code>virtual_env/ml_env/lib/python3.12/site-packages/mlflow/cli.py</code>
 
                 The error is in <code>cli.py</code>, just substitute <code>get("mlflow.app", [])</code> by <code>select(group="mlflow.app")</code>
               </p>
