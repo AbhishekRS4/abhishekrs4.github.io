@@ -79,7 +79,7 @@
           <tr>
             <td width="67%" valign="middle">
               <heading>
-                Tech Blog: AWS instance setup and usage for deploying Machine Learning pipeline
+                Tech Blog: AWS instance setup and usage for deploying MLFlow based Machine Learning pipelines
               </heading>
               <br>
               <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-05-03</strong>, updated on <strong>2024-05-07</strong> </span>
@@ -169,11 +169,48 @@
                 This can be done via account -> security credentials ->  create access key -> copy the access key and secret access key.
               </p>
 
-              <h5>1.4) Install awscli and configure aws via commandline</h5>
+              <h5>1.4) Install awscli and boto3</h5>
               <p>
-                Run <code>pip install awscli</code> to install.
+                Run <code>pip install awscli boto3</code> to install.
                 Run <code>aws configure</code> and enter the access keys.
                 Run <code>aws s3 ls</code> to list the AWS s3 buckets.
+              </p>
+
+              <h5>1.5) Run MLFlow server</h5>
+              <p>
+                Run the following command to start the MLFlow server.
+                <code>mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USERNAME:DB_PASSWORD@DB_ENDPOINT:DB_PORT/DB_NAME --default-artifact-roots3://S3_BUCKET_NAME</code>
+              </p>
+              <p>
+                If you get the below mentioned error,
+                <code>
+                    File "/home/ubuntu/ml_env/lib/python3.12/site-packages/mlflow/cli.py", line 356, in &lt;module&gt;
+                    type=click.Choice([e.name for e in importlib.metadata.entry_points().get("mlflow.app", [])]),
+
+                    AttributeError: 'EntryPoints' object has no attribute 'get'
+                </code>
+              </p>
+              <p>
+                Then make changes to the following file
+                <code>virtual_env/ml_env/lib/python3.12/site-packages/mlflow/cli.pycli.py</code>
+
+                The error is in <code>cli.py</code>, just substitute <code>get("mlflow.app", [])</code> by <code>select(group="mlflow.app")</code>
+              </p>
+              <p>
+                If you get the following error
+                <code>
+                  ModuleNotFoundError: No module named 'psycopg2'
+                </code>
+
+                then install the psycopg2 using the following command
+                <code>
+                  pip install psycopg2-binary
+                </code>
+              </p>
+              <p>
+                Add an inbound rule for the security group to allow access to port 5000.
+                More info on the inbound rule setup can be found in <link href="https://github.com/DataTalksClub/mlops-zoomcamp/blob/main/02-experiment-tracking/mlflow_on_aws.md">[MLFlow setup on AWS]</link>
+                Now, the MLFlow UI can be accessed in <code>http://EC2_PUBLIC_DNS:5000</code>
               </p>
 
               <h3>2) Configuring an S3 bucket</h3>
