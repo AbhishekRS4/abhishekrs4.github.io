@@ -179,7 +179,7 @@
               <h5>1.5) Run MLFlow server</h5>
               <p>
                 Run the following command to start the MLFlow server.
-                <code>mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USERNAME:DB_PASSWORD@DB_ENDPOINT:DB_PORT/DB_NAME --default-artifact-roots3://S3_BUCKET_NAME</code>
+                <code>mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USERNAME:DB_PASSWORD@DB_ENDPOINT:DB_PORT/DB_NAME --default-artifact-root s3://S3_BUCKET_NAME</code>
               </p>
               <p>
                 If you get the below mentioned error,
@@ -210,7 +210,7 @@
               <p>
                 Add an inbound rule for the security group to allow access to port <code>5000</code>.
                 More info on the inbound rule setup can be found in <a href="https://github.com/DataTalksClub/mlops-zoomcamp/blob/main/02-experiment-tracking/mlflow_on_aws.md">MLFlow setup on AWS</a>.
-                Now, the MLFlow UI can be accessed in <code>http://EC2_PUBLIC_DNS:5000</code>
+                Now, the MLFlow UI can be accessed in <code>http://EC2_PUBLIC_DNS:5000</code>. This can also be used as the <code>tracking_uri</code> in MLFlow.
               </p>
 
               <h3>2) Configuring an S3 bucket</h3>
