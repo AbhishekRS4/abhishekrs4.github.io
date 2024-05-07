@@ -92,6 +92,10 @@
 
               <!-- Some specific info about the project -->
               <h3>1) EC2 instance Setup</h3>
+              <p>
+                I used MLFlow both locally and on AWS, for tracking. The MLFlow server can be run on a AWS EC2 instance.
+                In this section, I have discussed how to setup EC2 instance for the same.
+              </p>
               <h5>1.1) Basic Instructions</h5>
               <p>
                 The first step is to setup an EC2 instance. This can be done via services -> compute -> EC2 -> launch an instance.
@@ -217,13 +221,22 @@
 
               <h3>2) Configuring an S3 bucket</h3>
               <p>
-                This can be done via services -> storage -> S3 -> create bucket by choosing a unique
-                bucket name with default settings.
+                The model files, requirements and other environment files are stored under artifacts in MLFlow.
+                When using MLFlow, I have tried storing these locally as well as on the Amazon S3 bucket.
+              </p>
+              <p>
+                The configuration for an S3 bucket can be done via services -> storage -> S3 -> create bucket.
+                Choose a unique bucket name with default settings.
               </p>
 
               <h3>3) Configuring and setting up an instance of RDS</h3>
               <p>
-                This can be done via services -> database -> RDS -> create database.
+                All the metadata for an ML experiment like params, metrics etc. will be stored in a relational database
+                in MLFlow, if we choose to do so. When using MLFlow, I have tried with SQLite database when running locally.
+                For AWS, I have tried with PostgreSQL.
+              </p>
+              <p>
+                The AWS RDS setup can be done via services -> database -> RDS -> create database.
               </p>
 
               <ul>
@@ -274,6 +287,7 @@
                 </li>
               </ul>
 
+              <!-- Some conclusions, learnings during this project -->
               <h3>Main takeaway</h3>
               <p>
                 This is not my first time setup / use of EC2 instance and S3 bucket &#128517; but a first time configuring
@@ -283,6 +297,7 @@
                 This blog can be used for deploying complex ML pipelines on AWS. To deploying complex MLOps pipelines now &#128516;.
               </p>
 
+              <!-- Future work ideas, to build on this project -->
               <h3>Next Steps</h3>
               <ul>
                 <li>
