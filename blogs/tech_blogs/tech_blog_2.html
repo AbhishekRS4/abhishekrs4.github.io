@@ -185,10 +185,12 @@
               <h5>1.5) Run MLFlow server</h5>
               <p>
                 Run the following command to start the MLFlow server.
+                <br>
                 <code>mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USERNAME:DB_PASSWORD@DB_ENDPOINT:DB_PORT/DB_NAME --default-artifact-root s3://S3_BUCKET_NAME</code>
               </p>
               <p>
                 If you get the below mentioned error,
+                <br>
                 <code>
                     File "/home/ubuntu/ml_env/lib/python3.12/site-packages/mlflow/cli.py", line 356, in &lt;module&gt;
                     type=click.Choice([e.name for e in importlib.metadata.entry_points().get("mlflow.app", [])]),
