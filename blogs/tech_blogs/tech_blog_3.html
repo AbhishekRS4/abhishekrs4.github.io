@@ -141,6 +141,54 @@
               </p>
 
               <p>
+                The data ingestion pipeline developed in this project uses the following workflow.
+                It downloads the <code>parquet</code> dataset files from the publicly available
+                <a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">New York City taxi trips dataset </a>
+                for the specified year and month. It also creates a larger <code>parquet</code> file for the
+                entire year by merging other months data from the relevant year.
+              </p>
+
+              <p>
+                The flow is divided into four different tasks.
+
+                <ul>
+                  <li>
+                    <p>
+                      Create a directory for the dataset, if it does not exist already.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Download the dataset file (<code>parquet</code>) for the selected year and month.
+                      Since this task tries to download it from the web, it can fail due to failed connections,
+                      so retries has been implemented.
+                    </p>
+                  </li>
+                </ul>
+                <ul>
+                  <li>
+                    <p>
+                      Load the dataframe of the data for the selected month.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Load the dataframe of the year, (create an empty one if it does not exist already).
+                      Merge the dataframe of the selected month with the dataframe for the year. Save the
+                      <code>parquet</code> dataset file for the entire year.
+                    </p>
+                  </li>
+                </ul>
+              </p>
+
+              <p>
+                To understand how things worked, I tried two scenarios where the workflow was successful and the workflow failed.
+                To test first scenario where the workflow succeeds was a straight-forward one. To test the other scenario,
+                I just tried to download a non-existent dataset file from the dataset webpage. I have included some dashboard
+                visualizations from my experiments.
+              </p>
+
+              <p>
                 The following image shows a Prefect dashboard visualization of the registered flows.
               </p>
               <div class="featured-image">
