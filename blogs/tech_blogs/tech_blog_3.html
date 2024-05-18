@@ -82,7 +82,7 @@
                 Tech Blog: Data Ingestion using Prefect for workflow orchestration
               </heading>
               <br>
-              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-05-09</strong>, updated on <strong>2024-05-09</strong> </span>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-05-09</strong>, updated on <strong>2024-05-18</strong> </span>
 
               <!-- General info about the project -->
               <h3>The blog is about...</h3>
@@ -216,6 +216,53 @@
                 <img src="../../assets/images/tech_blogs/blog_3/failed_flow_retries.png" width="100%">
               </div>
 
+              <h3>1.5) Creating a local deployment</h3>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      The first step is to create a work pool. This can be done in the Prefect UI in the following way.
+                      <br>
+                      Work Pools -> Create -> Choose the type of work pools from a list of supported work pools (process for local) -> Select a name
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      The next step is to create a deployment. Run the following command on the commandline
+                      and choose the deployment type (local or git).
+                      <br>
+                      <code>prefect project init</code>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Run the following command to create a deployment
+                      <br>
+                      <code>prefect deploy script.py:[flow_name] -n [deployment_name] -p  [work_pool] </code>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Run the following command to schedule a deployment
+                      <br>
+                      <code>prefect deployment run '[flow_name]/[deployment_name]'</code>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Run the following command to start a work pool
+                      <br>
+                      <code>prefect worker start --pool '[work_pool]'</code>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Run a deployment from the UI. Go to deployments -> Quick Run on the appropriate deployment
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
               <!-- Some conclusions, learnings during this project -->
               <h3>Main takeaway</h3>
               <p>
@@ -223,7 +270,7 @@
                 The main advantage is the simplicity of the usage of Prefect with just Python decorators. The sophistication that
                 Prefect has to offer like the caching, retries etc., can only be appreciated by using it more and more.
                 This blog can be used as a reference for deploying complex MLOps and data pipelines using Prefect for orchestration.
-                To deploying some complex MLOps and data pipelines with Prefect orchestration now &#128516;.
+                To deploying more complex MLOps and data pipelines with Prefect orchestration now &#128516;.
               </p>
 
               <!-- Future work ideas, to build on this project -->
