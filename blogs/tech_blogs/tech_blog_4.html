@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+  <meta name=viewport content=“width=800”>
+  <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
+  <meta name="google-site-verification" content="XXjK99sZKdpFN8kxwbglvDK8Gbhanfx-QfZGGG_TU1M" />
+  <style type="text/css">
+    /* Color scheme stolen from Sergey Karayev */
+
+    a {
+      color: #1772d0;
+      text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+      color: #f09228;
+      text-decoration: none;
+    }
+
+    body,
+    td,
+    th,
+    tr,
+    p,
+    a {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px
+    }
+
+    strong {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+    }
+
+    heading {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 24px;
+    }
+
+    papertitle {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 700
+    }
+
+    name {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 34px;
+    }
+
+    #paper_img{
+      width: 200px;
+    }
+
+    .fade {
+      transition: opacity .2s ease-in-out;
+      -moz-transition: opacity .2s ease-in-out;
+      -webkit-transition: opacity .2s ease-in-out;
+    }
+
+    span.highlight {
+      background-color: #ffffd0;
+    }
+  </style>
+
+  <title>Abhishek Ramanathapura Satyanarayana</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href="../../assets/css/tech_blog.css" rel="stylesheet">
+</head>
+
+<body>
+  <table width="900" border="0" align="center" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <tr>
+            <td width="67%" valign="middle">
+              <heading>
+                Tech Blog: Packaging a Python project with setuptools to create a command-line tool for merging PDFs
+              </heading>
+              <br>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-07-03</strong> </span>
+
+              <!-- General info about the project -->
+              <h3>The blog is about...</h3>
+              <p>
+                Packaging a Python project with setuptools to create a command-line tool to merge multiple PDFs into a single PDF file.
+                This project can be found in the <a href="https://github.com/AbhishekRS4/merge_pdfs"> merge_pdfs </a> GitHub repo.
+              </p>
+
+              <!-- Some specific info about the project -->
+              <h3>1.1) Using click for parsing command-line args </h3>
+              <p>
+                Click is user-friendly package for parsing command-line args.
+                It provides decorators that are very easy to use. It has sophosticated features that makes it worth using.
+                In this project, a particular feature to combine multiple PDF files, provided via command-line as inputs, into a single PDF file.
+                <code> @click.option() </code> can be used for a named argument. This can be made multiple by setting the flag with the same name. 
+                It is that simple. This option is needed because one may need support to combine more than 2 PDF files. 
+                Otherwise, one will have to use the tool multiple times which I feel is simply a waste of time. 
+                In its current implementation, one can use a single command to merge as many PDF files as they need.
+              </p>
+
+              <h3>1.2) Packaging the tool with setuptools </h3>
+              <p>
+                Using <code>setuptools</code> to package the project to a command-line tool is straight-forward.
+                This can be done by creating a <code>setup.py</code> file in the project.
+                In the script a setup function can be defined with certain relevant arguments that does the job.
+                Most of the arguments are self-explanatory like name of the tool, author, version, dependencies etc.
+                Two important things to note are the following
+                <ul>
+                  <li>
+                    <p>
+                      <code>find_packages()</code>
+                      <br>
+                      can be used for recursively finding the packages in the project
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      The <code>entry_points</code> needs to be mentioned with the following convention
+                      <br>
+                      <code>[console_scripts]</code>
+                      <code>name_of_the_cli_tool = module_name.script_name:main_function_name</code>
+                    </p>
+                  </li>
+                </ul>
+              </p>
+
+              <h3>1.3) Installing the package as a command-line tool </h3>
+              <p>
+                After cloning the project repository,
+                the following command can be used to install the package as a command-line tool.
+                <br>
+                <code>python setup.py develop</code>
+              </p>
+
+              <h3>1.4) Using the command-line tool after installing</h3>
+              <p>
+                After installing, the command-line tool can be used in the following way,
+                <code>merge-pdfs --file-pdf <full-path-to_pdf-1> --file-pdf <full-path-to_pdf-2> --file-pdf <full-path-to_pdf-3> .....</code>
+                <br>
+                A quick thing to note in the command is that any number of PDF file can be given as input in a single command.
+                Multiple PDF files can be merged to a single PDF file with a single command. This is a pretty useful tool I have built here, I would say.
+              </p>
+
+              <!-- Some conclusions, learnings during this project -->
+              <h3>Main takeaway</h3>
+              <p>
+                These are some of the new things that I learned in this project. The first is the usage of <code>click</code> package to parse
+                command-line args. The decorator style usage that it provides is much more user friendly than <code>argparse</code>.
+                The second is to package a python project and convert it to a command-line executable tool using python <code>setuptools</code>. 
+                Since, this is a relatively simple tool, I did not face much difficulties during this project.
+              </p>
+
+              <!-- Future work ideas, to build on this project -->
+              <h3>Next Steps</h3>
+              <ul>
+                <li>
+                  <p>
+                    Package some more useful tools for document and data processing.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Package some AI tools for processing text docs, like using pre-trained HuggingFace transformers to summarize a document etc.
+                  </p>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <p>
+            <i>
+              <strong>About the author</strong>: Abhishek is a graduate AI engineer who is interested
+              in developing and deploying Artificial Intelligence, Machine Learning, Computer Vision, Data Science
+              applications. His goal is to improve human lives by leveraging real world data.
+            </i>
+          </p>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
