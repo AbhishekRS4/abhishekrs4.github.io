@@ -177,8 +177,11 @@
                 Doing this directly will result in a failure since it will timeout (default timeout is 3 sec.). 
                 Set a higher timeout like 30 sec. (for initial loading) and a slightly higher memory in Configuration -> General -> Timeout.
                 After applying the above changes and test it, things will work. The first time will take a longer time to run (like > 20 sec.) and 
-                the subsequent runs will be much faster (in milli sec.). 
+                the subsequent runs will be much faster (in milli sec.). The following image shows the successful test of the lambda function.
               </p>
+              <div class="featured-image">
+                <img src="../../assets/images/tech_blogs/blog_5/lambda_test_success.png" width="100%">
+              </div>
 
               <h3>1.6) Exposing the AWS Lambda function using AWS API Gateway</h3>
               <p>
@@ -192,8 +195,12 @@
                 Create a method to invoke the resource using the following steps. 
                 Create method -> Select method type (POST) -> Choose as Lambda function -> Select the appropriate lambda function -> Create method
                 The API can be tested using Test. Copy paste the json to the request body and test. The first time will take a longer time to run (>2 sec.).
-                The subsequent runs will take much less time (in milli sec.)
+                The subsequent runs will take much less time (in milli sec.). The following image shows the successful test 
+                of the deployed API using the AWS API gateway.
               </p>
+              <div class="featured-image">
+                <img src="../../assets/images/tech_blogs/blog_5/deployed_api_success.png" width="100%">
+              </div>
               <p>
                 After all these steps, one can deploy the API using Deploy API -> select new stage -> choose a stage name (test)
                 Use the invoke URL in <code>test_lambda_func_aws.py</code> script to acutally send POST request to the API deployed on AWS.
