@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+  <meta name=viewport content=“width=800”>
+  <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
+  <meta name="google-site-verification" content="XXjK99sZKdpFN8kxwbglvDK8Gbhanfx-QfZGGG_TU1M" />
+  <style type="text/css">
+    /* Color scheme stolen from Sergey Karayev */
+
+    a {
+      color: #1772d0;
+      text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+      color: #f09228;
+      text-decoration: none;
+    }
+
+    body,
+    td,
+    th,
+    tr,
+    p,
+    a {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px
+    }
+
+    strong {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+    }
+
+    heading {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 24px;
+    }
+
+    papertitle {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 700
+    }
+
+    name {
+      font-family: 'Lato', Verdana, Helvetica, sans-serif;
+      font-size: 34px;
+    }
+
+    #paper_img{
+      width: 200px;
+    }
+
+    .fade {
+      transition: opacity .2s ease-in-out;
+      -moz-transition: opacity .2s ease-in-out;
+      -webkit-transition: opacity .2s ease-in-out;
+    }
+
+    span.highlight {
+      background-color: #ffffd0;
+    }
+  </style>
+
+  <title>Abhishek Ramanathapura Satyanarayana</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href="../../assets/css/tech_blog.css" rel="stylesheet">
+</head>
+
+<body>
+  <table width="900" border="0" align="center" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <tr>
+            <td width="67%" valign="middle">
+              <heading>
+                Tech Blog: Deploying an AWS Lambda function in Python for a machine learning model
+              </heading>
+              <br>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-07-04</strong></span>
+
+              <!-- General info about the project -->
+              <h3>The blog is about...</h3>
+              <p>
+                Creating a serverless deployment using AWS Lamdba function in Python for serving a machine learning model. The project can be 
+                found in the following Github repo
+                <a href="https://github.com/AbhishekRS4/ML_NY_Taxi/aws_lambda_func"> ML_NY_TAXI/aws_lambda_func </a>.
+              </p>
+
+              <!-- Some specific info about the project -->
+              <h3>1.1) Creating a lambda function script in Python</h3>
+              <p>
+                A lambda function can be created in Python very easily. Refer to the project repo.
+                A function named <code>lambda_handler</code> which takes an <code>event</code> as the argument returns a prediction inside a dict.
+                To test the lambda function locally, run the script named <code>test_lambda_func.py</code>. Once the sanity check for the 
+                working of the lambda function script is performed, it is ready to be containerized with docker.
+              </p>
+
+              <h3>1.2) IAM setup </h3>
+              <p>
+                Although, this is out of the scope of this blogpost, it is a standard practice to setup IAM users, groups and roles.
+                Create an AWS user if not present already. Create a group for AWS Lambda users, API Gateway admin, ECR users. 
+                Add user to these groups. Add policy to these groups by giving full access to relevant things. 
+                Create a role for lambda with full access to lambda.
+              </p>
+
+              <h3>1.3) Creating a docker image for the lambda function and testing it locally</h3>
+              <p>
+                A list of publicly available docker images for AWS can be found in 
+                <a href="https://gallery.ecr.aws/">Amazon Elastic Container Registry (ECR) public gallery</a>.
+                One can search for "lambda python" and find a docker image for appropriate python version under <strong>Image tags</strong>.
+                This image can be used as a base docker image to build a custom docker image for a lambda function.
+              </p>
+
+              <p>
+                Unlike a typical <code>Dockerfile</code>, there will be certain changes.
+                <ul>
+                  <li>
+                    <p>
+                      There is no need to set working directory using <code>WORKDIR /app</code>
+                      that is usually done in case of dockerizing a Flask / FastAPI application.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      There is no need to expose a port for docekrizing the lambda function, 
+                      that is usually done in case of dockerizing a Flask / FastAPI application.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      The final <code>CMD</code> to run an application inside the container will just be the 
+                      <br>
+                      <code>lambda_function_script:lambda_function_handler</code>
+                    </p>
+                  </li>
+                </ul>
+              </p>
+
+              <p>
+                To build the docker container, use the following command,
+                <br>
+                <code>docker build -t aws-lambda-ny-taxi .</code>
+              </p>
+
+              <p>
+                To test the docker container locally, run the following command,
+                <br>
+                <code>docker run -it --rm -p 8080:8080 aws-lambda-ny-taxi:latest</code>
+                <br>
+                followed by the test script named <code>test_lambda_func_local.py</code>
+              </p>
+
+              <h3>1.4) Creating a repo for docker container on AWS ECR</h3>
+              <p>
+                Create a private repo for the docker container using the following steps.
+                ECR -> Create repo -> Select private -> Choose a name for the repo -> Create repo
+              </p>
+              <p>
+                Once the repo is created, go to the repo on AWS, see <code>View Push Commands</code>. Run all the commands in the terminal.
+              </p>
+
+              <h3>1.5) Setting up the Lambda function on AWS</h3>
+              <p>
+                The AWS Lambda function needs to be set up. This can be done using the following steps.
+                Lambda -> Create function -> Select from container image -> Choose a name for the lambda function -> 
+                Choose the container image with browse images -> Choose x86_64 -> Choose existing role and select appropriate role -> Create
+              </p>
+
+              <p>
+                One can easily test the lambda function using the test option. Copy paste the json input and then test. 
+                Doing this directly will result in a failure since it will timeout (default timeout is 3 sec.). 
+                Set a higher timeout like 30 sec. (for initial loading) and a slightly higher memory in Configuration -> General -> Timeout.
+                After applying the above changes and test it, things will work. The first time will take a longer time to run (like > 20 sec.) and 
+                the subsequent runs will be much faster (in milli sec.). 
+              </p>
+
+              <h3>1.6) Exposing the AWS Lambda function using AWS API Gateway</h3>
+              <p>
+                A Rest API needs to be created for exposing the Lambda function. This can be done using the following steps.
+                API Gateway -> Rest API -> Choose a name for the API -> Create API
+              </p>
+              <p>
+                Once the API is created, a resource needs to be created. This can be done by create resource and choose the name of the resource (/predict).
+              </p>
+              <p>
+                Create a method to invoke the resource using the following steps. 
+                Create method -> Select method type (POST) -> Choose as Lambda function -> Select the appropriate lambda function -> Create method
+                The API can be tested using Test. Copy paste the json to the request body and test. The first time will take a longer time to run (>2 sec.).
+                The subsequent runs will take much less time (in milli sec.)
+              </p>
+              <p>
+                After all these steps, one can deploy the API using Deploy API -> select new stage -> choose a stage name (test)
+                Use the invoke URL in <code>test_lambda_func_aws.py</code> script to acutally send POST request to the API deployed on AWS.
+              </p>
+
+              <h3>1.7) Challenges faced</h3>
+              <ul>
+                <li>
+                  <p>
+                    I forgot to remove the <code>WORKDIR /app</code> from the Dockerfile for the lambda function and got some errors 
+                    that the script <code>lambda_function.py</code> was not found. I figured it out later and removed <code>WORKDIR /app</code>.
+                    This is because of the fact that AWS is providing the base docker image and they would have built it with their own config.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Another mistake that I made was that number of arguments for any lambda function <code>lambda_handler()</code> is two and 
+                    it will require event and context as arguments. I initially used only one as I was still learning and experimenting. I got
+                    some error regarding mismatch in the number of function args. After fixing this, things worked smoothly.
+                  </p>
+                </li>
+              </ul>
+
+              <!-- Some conclusions, learnings during this project -->
+              <h3>Main takeaway</h3>
+              <p>
+                <ul>
+                  <li>
+                    <p>
+                    I learned to create a lambda function in Python for deploying a machine learning model to AWS Lambda. 
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                    I learned to create a repo in ECR and push a docker container image to the ECR.
+                    </p>
+                  </li> 
+                  <li>
+                    <p>
+                      I learned to create an AWS Lambda function from the container image and test it.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      I learned to create a Rest API for the deployed lambda function using the AWS API Gateway.
+                    </p>
+                  </li>
+                </ul>
+                To deploying more complex ML models using AWS Lambda in the future &#128516;.
+              </p>
+
+              <!-- Future work ideas, to build on this project -->
+              <h3>Next Steps</h3>
+              <ul>
+                <li>
+                  <p>
+                    Deploy multiple complex ML models to AWS Lambda.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Deploy lambda functions with different variants like adding a trigger to S3 bucket or streaming using Kinesis.
+                  </p>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+
+        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+          <p>
+            <i>
+              <strong>About the author</strong>: Abhishek is a graduate AI engineer who is interested
+              in developing and deploying Artificial Intelligence, Machine Learning, Computer Vision, Data Science
+              applications. His goal is to improve human lives by leveraging real world data.
+            </i>
+          </p>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
