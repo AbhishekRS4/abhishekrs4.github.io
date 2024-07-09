@@ -82,7 +82,7 @@
                 Tech Blog: Deploying an AWS Lambda function in Python for a machine learning model
               </heading>
               <br>
-              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-07-04</strong></span>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-07-04</strong>, updated on <strong>2024-07-09</strong></span>
 
               <!-- General info about the project -->
               <h3>The blog is about...</h3>
@@ -97,8 +97,8 @@
               <p>
                 A lambda function can be created in Python very easily. Refer to the project repo.
                 A function named <code>lambda_handler</code> which takes an <code>event</code> as the argument returns a prediction inside a dict.
-                To test the lambda function locally, run the script named <code>test_lambda_func.py</code>. Once the sanity check for the 
-                working of the lambda function script is performed, it is ready to be containerized with docker.
+                To perform sanity test for the lambda function locally, run the script named <code>sanity_lambda_func.py</code>. Once the sanity check
+                for the working of the lambda function script is successful, it is ready to be containerized with docker.
               </p>
 
               <h3>1.2) IAM setup </h3>
@@ -149,11 +149,11 @@
               </p>
 
               <p>
-                To test the docker container locally, run the following command,
+                To send post request to the lambda function running inside the docker container locally, run the following command,
                 <br>
                 <code>docker run -it --rm -p 8080:8080 aws-lambda-ny-taxi:latest</code>
                 <br>
-                followed by the test script named <code>test_lambda_func_local.py</code>
+                followed by the post request script named <code>post_req_lambda_func_local.py</code>
               </p>
 
               <h3>1.4) Creating a repo for docker container on AWS ECR</h3>
@@ -203,7 +203,7 @@
               </div>
               <p>
                 After all these steps, one can deploy the API using Deploy API -> select new stage -> choose a stage name (test)
-                Use the invoke URL in <code>test_lambda_func_aws.py</code> script to acutally send POST request to the API deployed on AWS.
+                Use the invoke URL in <code>post_req_lambda_func_aws.py</code> script to test sending POST requests to the API deployed on AWS.
               </p>
 
               <h3>1.7) Challenges faced</h3>
