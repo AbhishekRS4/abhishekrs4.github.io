@@ -205,6 +205,7 @@
               <h3>1.7) Verifying the working of the Lambda function in the terminal</h3>
               <p>
                 In a terminal, run the following to send data to input Kinesis stream
+                <br>
                 <code>
                   KINESIS_STREAM_INPUT=ny-taxi-ride-event
                   <br>
@@ -229,6 +230,7 @@
 
               <p>
                 In a terminal, run the following command to read data from the output Kinesis stream
+                <br>
                 <code>
                   KINESIS_STREAM_OUTPUT='ny-taxi-ride-duration-pred-event'
                   <br>
@@ -258,10 +260,16 @@
                 </code>
               </p>
 
+              <p>
+                The following image shows the success of the publishing data to the Kinesis input stream.
+              </p>
               <div class="featured-image">
                 <img src="../../assets/images/tech_blogs/blog_7/aws_lambda_kinesis_stream_input_success.png" width="100%">
               </div>
 
+              <p>
+                The following image shows the success of reading the data from the Kinesis output stream and decoding it.
+              </p>
               <div class="featured-image">
                 <img src="../../assets/images/tech_blogs/blog_7/aws_lambda_kinesis_stream_output_success.png" width="100%">
               </div>
