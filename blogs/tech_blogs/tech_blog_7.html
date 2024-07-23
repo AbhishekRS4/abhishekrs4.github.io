@@ -290,9 +290,9 @@
                 <li>
                   <p>
                     I faced some issues with package dependencies while building the docker container image. The main issue was with <code>boto3</code> package.
-                    The package is already installed in the base docker image but the newer <code>MLFlow</code> package will require a newer <code>boto3</code> 
-                    version. This is because <code>MLFlow</code> will use <code>boto3</code> SDK for S3 bucket operations for model artifacts. However, I was 
-                    able to resolve the issue with a quick update of <code>boto3</code>.
+                    The package is already installed in the base docker image but the newer <code>MLFlow</code> version will require a newer <code>boto3</code> 
+                    version. This is because <code>MLFlow</code> will use <code>boto3</code> SDK for AWS S3 bucket operations for handling model artifacts. 
+                    However, I was able to resolve the issue with a quick update of <code>boto3</code>.
                   </p>
                 </li>
                 <li>
