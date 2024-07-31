@@ -82,7 +82,7 @@
                 Tech Blog: Deploying an AWS Lambda function in Python with Kinesis streaming for a machine learning model
               </heading>
               <br>
-              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-07-23</strong></span>
+              <span> Posted by <strong>Abhishek R. S.</strong> on <strong>2024-07-23</strong>, updated on <strong>2024-07-31</strong></span>
 
               <!-- General info about the project -->
               <h3>The blog is about...</h3>
@@ -209,60 +209,21 @@
 
               <h3>1.7) Verifying the working of the Lambda function in the terminal</h3>
               <p>
-                In a terminal, run the following to send data to input Kinesis stream
-                <br>
+                In a terminal, run the following commands to send data to input Kinesis stream
+                <pre class="code">
                 <code>
                   KINESIS_STREAM_INPUT=ny-taxi-ride-event
-                  <br>
-                  <br>
+
                   aws kinesis put-record     --stream-name ${KINESIS_STREAM_INPUT}     --partition-key 1     --data '{
-                    <br>
                     "ride": {
-                      <br>
                         "PULocationID": 130,
-                        <br>
                         "DOLocationID": 205,
-                        <br>
                         "trip_distance": 3.66
-                        <br>
                     }, 
-                    <br>
                     "ride_id": 156
-                    <br>
                   }'
                 </code>
-              </p>
-
-              <p>
-                In a terminal, run the following command to read data from the output Kinesis stream
-                <br>
-                <code>
-                  KINESIS_STREAM_OUTPUT='ny-taxi-ride-duration-pred-event'
-                  <br>
-                  <br>
-                  SHARD='shardId-000000000000'
-                  <br>
-                  <br>
-                  SHARD_ITERATOR=$(aws kinesis \
-                  <br>
-                    get-shard-iterator \
-                    <br>
-                    --shard-id ${SHARD} \
-                    <br>
-                    --shard-iterator-type TRIM_HORIZON \
-                    <br>
-                    --stream-name ${KINESIS_STREAM_OUTPUT} \
-                    <br>
-                    --query 'ShardIterator' \
-                    <br>
-                  )
-                  <br>
-                  <br>
-                  RESULT=$(aws kinesis get-records --shard-iterator $SHARD_ITERATOR)
-                  <br>
-                  <br>
-                  echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
-                </code>
+                </pre>
               </p>
 
               <p>
@@ -271,6 +232,30 @@
               <div class="featured-image">
                 <img src="../../assets/images/tech_blogs/blog_7/aws_lambda_kinesis_stream_input_success.png" width="100%">
               </div>
+
+              <p>
+                In a terminal, run the following commands to read data from the output Kinesis stream
+                <br>
+                <pre class="code">
+                <code>
+                  KINESIS_STREAM_OUTPUT='ny-taxi-ride-duration-pred-event'
+
+                  SHARD='shardId-000000000000'
+                  
+                  SHARD_ITERATOR=$(aws kinesis \
+                    get-shard-iterator \
+                    --shard-id ${SHARD} \
+                    --shard-iterator-type TRIM_HORIZON \
+                    --stream-name ${KINESIS_STREAM_OUTPUT} \
+                    --query 'ShardIterator' \
+                  )
+                  
+                  RESULT=$(aws kinesis get-records --shard-iterator $SHARD_ITERATOR)
+                  
+                  echo ${RESULT} | jq -r '.Records[0].Data' | base64 --decode
+                </code>
+                </pre>
+              </p>
 
               <p>
                 The following image shows the success of reading the data from the Kinesis output stream and decoding it.
