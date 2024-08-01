@@ -6,3 +6,7 @@ code {
   font-size: 105%;
   white-space: pre-line;
 }
+
+pre {
+  background-color: #f1f1f1;
+}
